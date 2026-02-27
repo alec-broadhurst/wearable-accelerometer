@@ -1,0 +1,15 @@
+{
+    "name": "Wearable Accelerometer",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "remoteUser": "root",
+    "workspaceFolder": "/workspace",
+    "mounts": ["source=${localWorkspaceFolder},target=/workspace,type=bind"],
+    "postCreateCommand": "mkdir build && cmake -S . -B build && ln -sf build/compile_commands.json .",
+    "customizations": {
+        "vscode": {
+            "extensions": ["llvm-vs-code-extensions.vscode-clangd"]
+        }
+    }
+}
