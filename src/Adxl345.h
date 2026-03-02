@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Arduino.h"
 #include "Adafruit_ADXL345_U.h"
 
 struct AccelData {
