@@ -9,6 +9,7 @@ set(CMAKE_SYSTEM_NAME Generic)
 project(wearable-accelerometer CXX C ASM)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
 
 set(MCU atmega328p)
 
@@ -34,6 +35,8 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     Adafruit_BusIO
     Adafruit_Sensor
     Adafruit_ADXL345
+    Adafruit_LiquidCrystal
+    SD
 )
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
