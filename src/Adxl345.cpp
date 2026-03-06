@@ -14,5 +14,11 @@ bool Adxl345::begin() {
 }
 
 AccelData Adxl345::read() {
-    return { accel.getX(), accel.getY(), accel.getZ() };
+    AccelData data;
+
+    data.x = accel.getX() * G_SCALE / STEPS_PER_G;
+    data.y = accel.getY() * G_SCALE / STEPS_PER_G;
+    data.z = accel.getZ() * G_SCALE / STEPS_PER_G;
+
+    return data;
 }

@@ -2,6 +2,9 @@
 
 #include "Adafruit_ADXL345_U.h"
 
+#define G_SCALE 100
+#define STEPS_PER_G 256
+
 struct AccelData {
     int16_t x;
     int16_t y;
