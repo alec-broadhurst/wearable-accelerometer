@@ -1,4 +1,3 @@
-#include "Adxl345.h"
 #include "Logger.h"
 
 
