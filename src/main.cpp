@@ -1,5 +1,6 @@
 #include "Arduino.h"
 #include "Adxl345.h"
+#include "Logger.h"
 
 int main(void) {
     /* Initialization logic */
@@ -9,6 +10,8 @@ int main(void) {
 
     Adxl345 accel;
     accel.begin();
+
+    Logger logger("log.csv");
 
 
     /* main loop */
