@@ -1,36 +1,31 @@
 cmake_minimum_required(VERSION 3.21)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_C_COMPILER avr-gcc)
-set(CMAKE_CXX_COMPILER avr-g++)
-set(CMAKE_ASM_COMPILER avr-gcc)
-set(CMAKE_SYSTEM_NAME Generic)
-
-project(wearable-accelerometer CXX C ASM)
+project(wearable-accelerometer LANGUAGES C CXX ASM)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_CROSSCOMPILING TRUE)
 set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
-
-set(MCU atmega328p)
-
-set(CMAKE_C_FLAGS   "-mmcu=${MCU} -Os -Wall")
-set(CMAKE_CXX_FLAGS "-mmcu=${MCU} -Os -Wall")
-set(CMAKE_EXE_LINKER_FLAGS "-mmcu=${MCU}")
 
 add_subdirectory(lib)
 
-set(PROJECT_SRCS
+add_library(avr_config INTERFACE)
+target_compile_options(avr_config INTERFACE -mmcu=atmega328p -Os)
+target_link_options(avr_config INTERFACE -mmcu=atmega328p)
+
+add_executable(${PROJECT_NAME})
+
+target_sources(${PROJECT_NAME} PRIVATE
     src/main.cpp
     src/Adxl345.cpp
+    src/Logger.cpp
 )
-
-add_executable(${PROJECT_NAME} ${PROJECT_SRCS})
 
 target_include_directories(${PROJECT_NAME} PRIVATE
     src/
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
+    avr_config
     ArduinoCore
     Adafruit_BusIO
     Adafruit_Sensor
