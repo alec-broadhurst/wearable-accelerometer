@@ -4,6 +4,26 @@
 
 Display::Display() : display(0x20) {}
 
-void Display::begin() {}
+void Display::begin() {
+    display.begin(16, 2);
+    display.noCursor();
+    display.clear();
 
-void Display::update_g(const AccelData& data) {}
+    display.setCursor(0, 0);
+    display.print("1.00G");
+}
+
+void Display::update_g(const AccelData& data) {
+    if (prev_data.z == data.z) return;
+    prev_data = data;
+
+    int8_t whole = data.z / G_SCALE;
+    int8_t frac = abs(data.z) - (whole * 100);
+
+    display.setCursor(0, 0);
+    display.print(whole);
+    display.print(".");
+    if (frac < 10) display.print("0");
+    display.print(frac);
+    display.print("G");
+}
