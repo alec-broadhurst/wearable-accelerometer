@@ -7,7 +7,7 @@
 class Logger {
     public:
         Logger(const char* filename);
-        void log(AccelData data);
+        void log(const AccelData& data);
 
     private:
         File file;
