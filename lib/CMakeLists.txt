@@ -27,6 +27,7 @@ target_sources(ArduinoCore PRIVATE
     ${ARDUINO_CORE_DIR}/wiring.c
     ${ARDUINO_CORE_DIR}/wiring_digital.c
     ${ARDUINO_CORE_DIR}/wiring_analog.c
+    ${ARDUINO_CORE_DIR}/wiring_shift.c
     ${ARDUINO_CORE_DIR}/hooks.c
     ${ARDUINO_CORE_DIR}/HardwareSerial.cpp
     ${ARDUINO_CORE_DIR}/HardwareSerial0.cpp
@@ -56,6 +57,8 @@ add_library(Adafruit_BusIO STATIC)
 target_sources(Adafruit_BusIO PRIVATE
     ${BUSIO_DIR}/Adafruit_I2CDevice.cpp
     ${BUSIO_DIR}/Adafruit_SPIDevice.cpp
+    ${BUSIO_DIR}/Adafruit_BusIO_Register.cpp
+    ${BUSIO_DIR}/Adafruit_GenericDevice.cpp
 )
 
 target_include_directories(Adafruit_BusIO PUBLIC ${BUSIO_DIR})
