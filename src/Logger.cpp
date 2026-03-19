@@ -1,4 +1,5 @@
 #include "Logger.h"
+#include "math_utils.h"
 
 
 Logger::Logger(const char* filename) {
@@ -10,9 +11,13 @@ Logger::Logger(const char* filename) {
 void Logger::log(const AccelData& data) {
     unsigned long time = millis();
 
-    file.print(data.z / G_SCALE);
+    int8_t whole = fixed_whole(data.z);
+    int8_t frac = fixed_frac(data.z);
+
+    file.print(whole);
     file.print(".");
-    file.print(data.z % G_SCALE);
+    if (frac < 10) file.print("0");
+    file.print(frac);
     file.print(",");
     file.println(time);
 }

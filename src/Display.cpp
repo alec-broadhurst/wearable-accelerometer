@@ -1,5 +1,6 @@
 #include "Display.h"
 #include "Adxl345.h"
+#include "math_utils.h"
 
 
 Display::Display() : display(0x20) {}
@@ -17,8 +18,8 @@ void Display::update_g(const AccelData& data) {
     if (prev_data.z == data.z) return;
     prev_data = data;
 
-    int8_t whole = data.z / G_SCALE;
-    int8_t frac = abs(data.z) - (whole * 100);
+    int8_t whole = fixed_whole(data.z);
+    int8_t frac = fixed_frac(data.z);
 
     display.setCursor(0, 0);
     display.print(whole);
