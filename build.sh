@@ -1,6 +1,12 @@
 BUILD_DIR=build
 
-cmake -DCMAKE_TOOLCHAIN_FILE=cmake/avr-toolchain.cmake -S . -B $BUILD_DIR
+if [ "$1" = "debug" ]; then
+    DEBUG_FLAG="-DDEBUG_BUILD=ON"
+else
+    DEBUG_FLAG=""
+fi
+
+cmake -DCMAKE_TOOLCHAIN_FILE=cmake/avr-toolchain.cmake $DEBUG_FLAG -S . -B $BUILD_DIR
 
 cmake --build "$BUILD_DIR"
 

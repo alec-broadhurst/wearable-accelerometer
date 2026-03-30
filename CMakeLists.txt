@@ -14,11 +14,16 @@ target_link_options(avr_config INTERFACE -mmcu=atmega328p)
 
 add_executable(${PROJECT_NAME})
 
+if(DEBUG_BUILD)
+    target_compile_definitions(${PROJECT_NAME} PRIVATE DEBUG)
+endif()
+
 target_sources(${PROJECT_NAME} PRIVATE
     src/main.cpp
     src/Adxl345.cpp
     src/Logger.cpp
     src/Display.cpp
+    src/System.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE
