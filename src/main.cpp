@@ -1,22 +1,17 @@
 #include "Arduino.h"
-#include "Adxl345.h"
-#include "Logger.h"
+#include "System.h"
+
 
 int main(void) {
     /* Initialization logic */
-    init();
+    init(); // Arduino setup
 
-    Serial.begin(9600);
-
-    Adxl345 accel;
-    accel.begin();
-
-    Logger logger("log.csv");
+    System system;
+    system.begin("log.csv"); // peripheral initialization
 
 
     /* main loop */
     while(1) {
-        Serial.write("Hello, world!\n");
-        delay(500);
+        system.update();
     }
 }
