@@ -2,10 +2,15 @@
 #include "math_utils.h"
 
 
-Logger::Logger(const char* filename) {
-    SD.begin();
-    file = SD.open(filename, FILE_WRITE);
-    file.println("G, Time");
+Logger::Logger() {}
+
+bool Logger::begin(const char* filename) {
+    if (!SD.begin()) return false;
+
+    _file = SD.open(filename, FILE_WRITE);
+    _file.println("G, Time");
+
+    return true;
 }
 
 void Logger::log(const AccelData& data) {
@@ -14,10 +19,10 @@ void Logger::log(const AccelData& data) {
     int8_t whole = fixed_whole(data.z);
     int8_t frac = fixed_frac(data.z);
 
-    file.print(whole);
-    file.print(".");
-    if (frac < 10) file.print("0");
-    file.print(frac);
-    file.print(",");
-    file.println(time);
+    _file.print(whole);
+    _file.print(".");
+    if (frac < 10) _file.print("0");
+    _file.print(frac);
+    _file.print(",");
+    _file.println(time);
 }

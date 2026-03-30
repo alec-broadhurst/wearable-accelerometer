@@ -6,9 +6,10 @@
 
 class Logger {
     public:
-        Logger(const char* filename);
+        Logger();
+        bool begin(const char* filename);
         void log(const AccelData& data);
 
     private:
-        File file;
+        File _file;
 };
