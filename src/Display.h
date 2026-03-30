@@ -7,7 +7,7 @@
 class Display {
     public:
         Display();
-        void begin();
+        bool begin();
         void update_g(const AccelData& data);
 
     private:

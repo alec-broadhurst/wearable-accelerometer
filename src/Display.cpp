@@ -5,13 +5,14 @@
 
 Display::Display() : display(0x20) {}
 
-void Display::begin() {
-    display.begin(16, 2);
+bool Display::begin() {
+    if (!display.begin(16, 2)) return false;
     display.noCursor();
     display.clear();
 
     display.setCursor(0, 0);
     display.print("1.00G");
+    return true;
 }
 
 void Display::update_g(const AccelData& data) {
