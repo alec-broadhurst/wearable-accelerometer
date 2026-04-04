@@ -22,7 +22,7 @@ void System::begin(const char* logFilename) {
 void System::update() {
     AccelData data = _sensor.read();
     _display.update_g(data);
-    _logger.log(data);
+    if (!_logger.log(data)) _handleError(SD_ERROR);
 }
 
 void System::_handleError(SystemError error) {
@@ -34,6 +34,6 @@ void System::_handleError(SystemError error) {
     }
 
     if (error != SD_ERROR) {
-        // _logger.log_error(error);
+        _logger.log_error(msg);
     }
 }
