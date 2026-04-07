@@ -30,7 +30,7 @@ void System::_handleError(SystemError error) {
     DEBUG_PRINT(msg);
 
     if (error != DISPLAY_ERROR) {
-        // _display.show_error();
+        _display.print_error(msg);
     }
 
     if (error != SD_ERROR) {

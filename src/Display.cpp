@@ -29,3 +29,10 @@ void Display::update_g(const AccelData& data) {
     display.print(frac);
     display.print("G");
 }
+
+void Display::print_error(const char *msg) {
+    display.setCursor(0, 1);
+    display.print("                ");
+    display.setCursor(0, 1);
+    display.print(msg);
+}
