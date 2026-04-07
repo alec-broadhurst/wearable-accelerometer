@@ -13,7 +13,7 @@ class Adxl345 {
     public:
         Adxl345();
         bool begin();
-        AccelData read();
+        void read(AccelData& data);
 
     private:
         Adafruit_ADXL345_Unified accel;

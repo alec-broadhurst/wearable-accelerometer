@@ -21,6 +21,7 @@ class System {
         Adxl345 _sensor;
         Display _display;
         Logger _logger;
+        AccelData _sensorData;
 
         void _handleError(SystemError error);
 };

@@ -13,12 +13,8 @@ bool Adxl345::begin() {
     return true;
 }
 
-AccelData Adxl345::read() {
-    AccelData data;
-
+void Adxl345::read(AccelData& data) {
     data.x = accel.getX();
     data.y = accel.getY();
     data.z = accel.getZ();
-
-    return data;
 }

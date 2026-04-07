@@ -20,9 +20,9 @@ void System::begin(const char* logFilename) {
 }
 
 void System::update() {
-    AccelData data = _sensor.read();
-    _display.update_g(data);
-    if (!_logger.log(data)) _handleError(SD_ERROR);
+    _sensor.read(_sensorData);
+    _display.update_g(_sensorData);
+    if (!_logger.log(_sensorData)) _handleError(SD_ERROR);
 }
 
 void System::_handleError(SystemError error) {
