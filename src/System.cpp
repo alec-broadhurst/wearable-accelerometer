@@ -17,6 +17,8 @@ void System::begin(const char* logFilename) {
     if (!_display.begin()) _handleError(DISPLAY_ERROR);
     if (!_sensor.begin()) _handleError(SENSOR_ERROR);
     if (!_logger.begin(logFilename)) _handleError(SD_ERROR);
+
+    _display.init_complete();
 }
 
 void System::update() {

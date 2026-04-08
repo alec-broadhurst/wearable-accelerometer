@@ -2,11 +2,16 @@
 #include "Adxl345.h"
 #include "math_utils.h"
 
+#define RED 0x1
+#define GREEN 0x2
+#define WHITE 0x7
+
 
 Display::Display() : display(0x20) {}
 
 bool Display::begin() {
     if (!display.begin(16, 2)) return false;
+    display.setBacklight(WHITE);
     display.noCursor();
     display.clear();
 
@@ -31,8 +36,18 @@ void Display::update_g(const AccelData& data) {
 }
 
 void Display::print_error(const char *msg) {
+    display.setBacklight(RED);
     display.setCursor(0, 1);
     display.print("                ");
     display.setCursor(0, 1);
     display.print(msg);
+}
+
+void Display::init_complete() {
+    display.setBacklight(GREEN);
+    display.setCursor(0, 0);
+    display.print("Startup Complete");
+    delay(3000);
+    display.clear();
+    display.setBacklight(WHITE);
 }

@@ -10,6 +10,7 @@ class Display {
         bool begin();
         void update_g(const AccelData& data);
         void print_error(const char* msg);
+        void init_complete();
 
     private:
         Adafruit_LiquidCrystal display;
