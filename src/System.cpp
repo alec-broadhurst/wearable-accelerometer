@@ -38,4 +38,8 @@ void System::_handleError(SystemError error) {
     if (error != SD_ERROR) {
         _logger.log_error(msg);
     }
+
+    if (error == SENSOR_ERROR) {
+        while (1);
+    }
 }
