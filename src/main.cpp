@@ -5,6 +5,10 @@ int main(void) {
     /* Initialization logic */
     init(); // Arduino setup
 
+    #ifdef DEBUG
+        Serial.begin(9600);
+    #endif
+
     System system;
     system.begin("log.csv"); // peripheral initialization
 
@@ -12,5 +16,6 @@ int main(void) {
     /* main loop */
     while(1) {
         system.update();
+        delay(20);
     }
 }
