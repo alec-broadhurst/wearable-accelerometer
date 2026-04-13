@@ -9,5 +9,5 @@ inline int8_t fixed_whole(int16_t data) {
 }
 
 inline uint8_t fixed_frac(int16_t data) {
-    return ((abs(data) & 0xFF) * 100 >> 8) - (fixed_whole(data) * 100);
+    return (abs(data) & 0xFF) * 100 >> 8;
 }
