@@ -1,6 +1,10 @@
 BUILD_DIR=build
 MODE="$1"
 
+if [ -d "$BUILD_DIR" ]; then
+    rm -rf "$BUILD_DIR"
+fi
+
 case $MODE in
     debug)
         BUILD_FLAG="-DDEBUG_BUILD=ON"

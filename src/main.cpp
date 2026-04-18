@@ -5,7 +5,7 @@ int main(void) {
     /* Initialization logic */
     init(); // Arduino setup
 
-    #ifdef DEBUG
+    #if defined (DEBUG) || defined (SIM)
         Serial.begin(9600);
     #endif
 
