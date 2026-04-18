@@ -5,9 +5,10 @@
 
 
 inline int8_t fixed_whole(int16_t data) {
-    return data >> 8;
+    return data / 256;
 }
 
 inline uint8_t fixed_frac(int16_t data) {
-    return (abs(data) & 0xFF) * 100 >> 8;
+    uint16_t remainder = abs(data) % 256;
+    return (uint8_t)((remainder * 100 + 128) >> 8);
 }

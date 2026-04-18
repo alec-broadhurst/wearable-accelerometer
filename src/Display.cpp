@@ -28,6 +28,7 @@ void Display::update_g(const AccelData& data) {
     int8_t frac = fixed_frac(data.z);
 
     display.setCursor(0, 0);
+    if (data.z < 0 && whole == 0) display.print("-");
     display.print(whole);
     display.print(".");
     if (frac < 10) display.print("0");

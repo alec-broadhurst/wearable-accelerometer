@@ -24,6 +24,7 @@ bool Logger::log(const AccelData& data) {
     int8_t whole = fixed_whole(data.z);
     int8_t frac = fixed_frac(data.z);
 
+    if (data.z < 0 && whole == 0) _file.print("-");
     _file.print(whole);
     _file.print(".");
     if (frac < 10) _file.print("0");
