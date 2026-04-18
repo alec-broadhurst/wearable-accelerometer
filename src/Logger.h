@@ -15,3 +15,11 @@ class Logger {
         File _file;
         File _error_file;
 };
+
+class LoggerSim {
+    public:
+        LoggerSim();
+        bool begin(const char* filename);
+        bool log(const AccelData& data);
+        bool log_error(const char* msg);
+};

@@ -18,10 +18,16 @@ class System {
         void update();
 
     private:
+        #ifdef DEBUG
+        Adxl345Sim _sensor;
+        DisplaySim _display;
+        LoggerSim _logger;
+        #else
         Adxl345 _sensor;
         Display _display;
         Logger _logger;
-        AccelData _sensorData;
+        #endif
 
+        AccelData _sensorData;
         void _handleError(SystemError error);
 };

@@ -39,3 +39,27 @@ bool Logger::log_error(const char* msg) {
 
     return true;
 }
+
+LoggerSim::LoggerSim() {}
+
+bool LoggerSim::begin(const char* filename) {
+    return true;
+}
+
+bool LoggerSim::log(const AccelData& data) {
+    unsigned long time = millis();
+
+    Serial.print("[LOG] ");
+    print_g(Serial, data);
+    Serial.print(",");
+    Serial.println(time);
+
+    return true;
+}
+
+bool LoggerSim::log_error(const char* msg) {
+    Serial.print("[ERROR] ");
+    Serial.println(msg);
+
+    return true;
+}

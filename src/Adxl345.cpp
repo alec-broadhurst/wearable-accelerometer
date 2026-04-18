@@ -18,3 +18,23 @@ void Adxl345::read(AccelData& data) {
     data.y = accel.getY();
     data.z = accel.getZ();
 }
+
+Adxl345Sim::Adxl345Sim() {}
+
+bool Adxl345Sim::begin() {
+    return true;
+}
+
+void Adxl345Sim::read(AccelData& data) {
+    static int16_t val = 256;
+    static int8_t dir = 1;
+
+    val += dir * 7;
+
+    if (val > 600 || val < -300)
+        dir *= -1;
+
+    data.x = 0;
+    data.y = 0;
+    data.z = val;
+}

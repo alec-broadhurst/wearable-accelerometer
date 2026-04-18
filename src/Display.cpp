@@ -1,5 +1,6 @@
 #include "Display.h"
 #include "Adxl345.h"
+#include "HardwareSerial.h"
 #include "math_utils.h"
 
 #define RED 0x1
@@ -44,4 +45,24 @@ void Display::init_complete() {
     delay(3000);
     display.clear();
     display.setBacklight(WHITE);
+}
+
+DisplaySim::DisplaySim() {}
+
+bool DisplaySim::begin() {
+    return true;
+}
+
+void DisplaySim::update_g(const AccelData& data) {
+    Serial.print("[DISPLAY] ");
+    print_g(Serial, data);
+    Serial.println(" G");
+}
+
+void DisplaySim::print_error(const char *msg) {
+    Serial.print("[ERROR] ");
+    Serial.println(msg);
+}
+
+void DisplaySim::init_complete() {
 }
