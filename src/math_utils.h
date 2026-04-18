@@ -17,6 +17,15 @@ inline void print_g(Print& out, const AccelData& data) {
     int8_t whole = fixed_whole(data.z);
     uint8_t frac = fixed_frac(data.z);
 
+    if (frac == 100) {
+        frac = 0;
+        if (data.z >= 0) {
+            whole += 1;
+        } else {
+            whole -= 1;
+        }
+    }
+
     if (data.z < 0 && whole == 0) out.print("-");
     out.print(whole);
     out.print(".");
