@@ -18,7 +18,7 @@ class System {
         void update();
 
     private:
-        #ifdef DEBUG
+        #ifdef SIM
         Adxl345Sim _sensor;
         DisplaySim _display;
         LoggerSim _logger;

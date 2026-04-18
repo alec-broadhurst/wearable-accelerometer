@@ -15,7 +15,11 @@ target_link_options(avr_config INTERFACE -mmcu=atmega328p)
 add_executable(${PROJECT_NAME})
 
 if(DEBUG_BUILD)
-    target_compile_definitions(${PROJECT_NAME} PRIVATE DEBUG)
+  target_compile_definitions(${PROJECT_NAME} PRIVATE DEBUG)
+endif()
+
+if(SIM_BUILD)
+  target_compile_definitions(${PROJECT_NAME} PRIVATE SIM)
 endif()
 
 target_sources(${PROJECT_NAME} PRIVATE

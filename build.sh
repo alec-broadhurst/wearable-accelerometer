@@ -1,12 +1,23 @@
 BUILD_DIR=build
+MODE="$1"
 
-if [ "$1" = "debug" ]; then
-    DEBUG_FLAG="-DDEBUG_BUILD=ON"
-else
-    DEBUG_FLAG=""
-fi
+case $MODE in
+    debug)
+        BUILD_FLAG="-DDEBUG_BUILD=ON"
+        ;;
+    sim)
+        BUILD_FLAG="-DSIM_BUILD=ON"
+        ;;
+    "")
+        BUILD_FLAG="" # release
+        ;;
+    *)
+        echo "Usage: $0 [debug|sim]"
+        exit 1
+        ;;
+esac
 
-cmake -DCMAKE_TOOLCHAIN_FILE=cmake/avr-toolchain.cmake $DEBUG_FLAG -S . -B $BUILD_DIR
+cmake -DCMAKE_TOOLCHAIN_FILE=cmake/avr-toolchain.cmake $BUILD_FLAG -S . -B $BUILD_DIR
 
 cmake --build "$BUILD_DIR"
 
