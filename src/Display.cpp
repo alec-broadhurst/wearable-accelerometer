@@ -24,16 +24,9 @@ void Display::update_g(const AccelData& data) {
     if (prev_data.z == data.z) return;
     prev_data = data;
 
-    int8_t whole = fixed_whole(data.z);
-    int8_t frac = fixed_frac(data.z);
-
     display.setCursor(0, 0);
-    if (data.z < 0 && whole == 0) display.print("-");
-    display.print(whole);
-    display.print(".");
-    if (frac < 10) display.print("0");
-    display.print(frac);
-    display.print("G");
+    print_g(display, data);
+    display.print(" G");
 }
 
 void Display::print_error(const char *msg) {

@@ -21,14 +21,7 @@ bool Logger::log(const AccelData& data) {
 
     unsigned long time = millis();
 
-    int8_t whole = fixed_whole(data.z);
-    int8_t frac = fixed_frac(data.z);
-
-    if (data.z < 0 && whole == 0) _file.print("-");
-    _file.print(whole);
-    _file.print(".");
-    if (frac < 10) _file.print("0");
-    _file.print(frac);
+    print_g(_file, data);
     _file.print(",");
     _file.println(time);
 
