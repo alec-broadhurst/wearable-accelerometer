@@ -12,6 +12,7 @@ bool Logger::begin(const char* filename) {
     if (!_file || !_error_file) return false;
 
     _file.println("G, Time");
+    _file.flush();
 
     return true;
 }
@@ -24,6 +25,7 @@ bool Logger::log(const AccelData& data) {
     print_g(_file, data);
     _file.print(",");
     _file.println(time);
+    _file.flush();
 
     return true;
 }
@@ -36,6 +38,7 @@ bool Logger::log_error(const char* msg) {
     _error_file.print(time);
     _error_file.print(": ");
     _error_file.println(msg);
+    _error_file.flush();
 
     return true;
 }
