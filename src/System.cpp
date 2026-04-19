@@ -14,11 +14,17 @@ static const char* errorToString(SystemError error) {
 System::System() {}
 
 void System::begin(const char* logFilename) {
-    if (!_display.begin()) _handleError(DISPLAY_ERROR);
-    if (!_sensor.begin()) _handleError(SENSOR_ERROR);
-    if (!_logger.begin(logFilename)) _handleError(SD_ERROR);
+    uint8_t failures = 0;
 
-    _display.init_complete();
+    if (!_display.begin()) failures |= 1 << DISPLAY_ERROR;
+    if (!_sensor.begin()) failures |= 1 << SENSOR_ERROR;
+    if (!_logger.begin(logFilename)) failures |= 1 << SD_ERROR;
+
+    if (failures & (1 << DISPLAY_ERROR)) _handleError(DISPLAY_ERROR);
+    if (failures & (1 << SENSOR_ERROR)) _handleError(SENSOR_ERROR);
+    if (failures & (1 << SD_ERROR)) _handleError(SD_ERROR);
+
+    if (!failures) _display.init_complete();
 }
 
 void System::update() {
