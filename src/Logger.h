@@ -14,6 +14,8 @@ class Logger {
     private:
         File _file;
         File _error_file;
+        unsigned long _lastFlush = 0;
+        const unsigned long _flushInterval = 1000;
 };
 
 class LoggerSim {

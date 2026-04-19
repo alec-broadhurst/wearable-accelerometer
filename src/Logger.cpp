@@ -20,12 +20,16 @@ bool Logger::begin(const char* filename) {
 bool Logger::log(const AccelData& data) {
     if (!_file) return false;
 
-    unsigned long time = millis();
+    unsigned long now = millis();
 
     print_g(_file, data);
     _file.print(",");
-    _file.println(time);
-    _file.flush();
+    _file.println(now);
+
+    if (now - _lastFlush >= _flushInterval) {
+        _file.flush();
+        _lastFlush = now;
+    }
 
     return true;
 }
