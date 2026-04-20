@@ -57,19 +57,22 @@ The firmware is written in C++ using a class-based approach to ensure modularity
 ---
 
 ## Build Instructions
-The project uses **CMake** with an AVR-specific toolchain to generate the production `.hex` file. A development container was made with all build dependencies pre-installed.
+The project uses **CMake** with an AVR-specific toolchain to generate the production `.hex` file. An Ubuntu 22.04 development container was made with all build dependencies pre-installed.
 
 ### Building
-Inside the dev container:
-
 Standard release build:
 ```bash
 ./build.sh
 ```
 
-Debug build — enables Serial output at **9600 baud**:
+Debug build — enables Serial output at 9600 baud:
 ```bash
 ./build.sh debug
+```
+
+Simulation build - generates mock data and emulates peripheral behavior then outputs via serial:
+```bash
+./build.sh sim
 ```
 
 This will generate `wearable-accelerometer.hex` in the `build/` directory, ready for flashing to the ATmega328P.
@@ -99,6 +102,6 @@ where `<serial port>` is the USB serial port assigned to the board.
 ## Failure Modes
 | Component | Behavior | Continues? |
 | :--- | :--- | :--- |
-| SD Card | Logging disabled, error shown on LCD | Yes — live G-force still displayed |
+| SD Card | Logging disabled, error shown on LCD if possible | Yes — live G-force still displayed |
 | LCD | No display output, error written to `error.log` | Yes — logging continues |
-| Accelerometer | Error displayed, system halts | No — no valid data source |
+| Accelerometer | Error displayed and logged, system halts | No — no valid data source |
