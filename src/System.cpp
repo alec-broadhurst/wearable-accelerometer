@@ -1,6 +1,8 @@
 #include "System.h"
 #include "debug.h"
 
+#define LOG_THRESHOLD 333 // 1.30 G
+
 
 static const char* errorToString(SystemError error) {
     switch (error) {
@@ -30,7 +32,10 @@ void System::begin(const char* logFilename) {
 void System::update() {
     _sensor.read(_sensorData);
     _display.update_g(_sensorData);
-    if (!_logger.log(_sensorData)) _handleError(SD_ERROR);
+
+    if (abs(_sensorData.z) >= LOG_THRESHOLD) {
+        if (!_logger.log(_sensorData)) _handleError(SD_ERROR);
+    }
 }
 
 void System::_handleError(SystemError error) {
