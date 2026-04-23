@@ -11,8 +11,6 @@
 Display::Display() : _prev_data() {}
 
 bool Display::begin() {
-    Wire.begin();
-
     _display.begin(16, 2);
     _display.setBacklight(WHITE);
     _display.noCursor();
