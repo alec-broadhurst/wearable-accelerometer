@@ -24,7 +24,7 @@ bool Display::begin() {
 }
 
 void Display::update_g(const AccelData& data) {
-    if (_prev_data.z == data.z) return;
+    if (abs(_prev_data.z - data.z) < 5) return;
     _prev_data = data;
 
     _display.setCursor(0, 0);
