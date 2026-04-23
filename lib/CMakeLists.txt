@@ -6,8 +6,7 @@ set(ARDUINO_LIB_DIR ArduinoCore-avr/libraries)
 set(BUSIO_DIR Adafruit_BusIO)
 set(ADXL345_DIR Adafruit_ADXL345)
 set(SENSOR_DIR Adafruit_Sensor)
-set(DISPLAY_DIR Adafruit_LiquidCrystal)
-set(MCP_DIR Adafruit-MCP23017/src)
+set(DISPLAY_DIR Adafruit-RGB-LCD-Shield)
 set(SD_DIR SD/src)
 
 
@@ -94,35 +93,21 @@ target_link_libraries(Adafruit_ADXL345 PUBLIC
 )
 
 
-# MCP23017
-add_library(MCP23017 STATIC)
-
-target_sources(MCP23017 PRIVATE
-    ${MCP_DIR}/Adafruit_MCP23X08.cpp
-    ${MCP_DIR}/Adafruit_MCP23X17.cpp
-    ${MCP_DIR}/Adafruit_MCP23XXX.cpp
-)
-
-target_include_directories(MCP23017 PUBLIC ${MCP_DIR})
-
-target_link_libraries(MCP23017 PUBLIC
-    ArduinoCore
-    Adafruit_BusIO
-)
-
-
 # Display
-add_library(Adafruit_LiquidCrystal STATIC)
+add_library(Adafruit-RGB-LCD-Shield STATIC)
 
-target_sources(Adafruit_LiquidCrystal PRIVATE
-    ${DISPLAY_DIR}/Adafruit_LiquidCrystal.cpp
+target_sources(Adafruit-RGB-LCD-Shield PRIVATE
+    ${DISPLAY_DIR}/Adafruit_RGBLCDShield.cpp
+    ${DISPLAY_DIR}/utility/Adafruit_MCP23017.cpp
 )
 
-target_include_directories(Adafruit_LiquidCrystal PUBLIC ${DISPLAY_DIR})
+target_include_directories(Adafruit-RGB-LCD-Shield PUBLIC
+  ${DISPLAY_DIR}
+  ${DISPLAY_DIR}/utility
+)
 
-target_link_libraries(Adafruit_LiquidCrystal PUBLIC
+target_link_libraries(Adafruit-RGB-LCD-Shield PUBLIC
     ArduinoCore
-    MCP23017
 )
 
 

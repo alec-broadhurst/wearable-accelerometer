@@ -1,6 +1,6 @@
 #include "Display.h"
-#include "Adxl345.h"
 #include "HardwareSerial.h"
+#include "Wire.h"
 #include "math_utils.h"
 
 #define RED 0x1
@@ -8,43 +8,45 @@
 #define WHITE 0x7
 
 
-Display::Display() : display(0x20) {}
+Display::Display() : _prev_data() {}
 
 bool Display::begin() {
-    if (!display.begin(16, 2)) return false;
-    display.setBacklight(WHITE);
-    display.noCursor();
-    display.clear();
+    Wire.begin();
 
-    display.setCursor(0, 0);
-    display.print("1.00G");
+    _display.begin(16, 2);
+    _display.setBacklight(WHITE);
+    _display.noCursor();
+    _display.clear();
+
+    _display.setCursor(0, 0);
+    _display.print("1.00G");
     return true;
 }
 
 void Display::update_g(const AccelData& data) {
-    if (prev_data.z == data.z) return;
-    prev_data = data;
+    if (_prev_data.z == data.z) return;
+    _prev_data = data;
 
-    display.setCursor(0, 0);
-    print_g(display, data);
-    display.print(" G");
+    _display.setCursor(0, 0);
+    print_g(_display, data);
+    _display.print(" G ");
 }
 
 void Display::print_error(const char *msg) {
-    display.setBacklight(RED);
-    display.setCursor(0, 1);
-    display.print("                ");
-    display.setCursor(0, 1);
-    display.print(msg);
+    _display.setBacklight(RED);
+    _display.setCursor(0, 1);
+    _display.print("                ");
+    _display.setCursor(0, 1);
+    _display.print(msg);
 }
 
 void Display::init_complete() {
-    display.setBacklight(GREEN);
-    display.setCursor(0, 0);
-    display.print("Startup Complete");
+    _display.setBacklight(GREEN);
+    _display.setCursor(0, 0);
+    _display.print("Startup Complete");
     delay(3000);
-    display.clear();
-    display.setBacklight(WHITE);
+    _display.clear();
+    _display.setBacklight(WHITE);
 }
 
 DisplaySim::DisplaySim() {}

@@ -40,7 +40,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     Adafruit_BusIO
     Adafruit_Sensor
     Adafruit_ADXL345
-    Adafruit_LiquidCrystal
+    Adafruit-RGB-LCD-Shield
     SD
 )
 

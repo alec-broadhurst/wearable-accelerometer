@@ -1,7 +1,9 @@
 #pragma once
 
+#include "Wire.h"
+
 #include "Adxl345.h"
-#include "Adafruit_LiquidCrystal.h"
+#include "Adafruit_RGBLCDShield.h"
 
 
 class Display {
@@ -13,8 +15,8 @@ class Display {
         void init_complete();
 
     private:
-        Adafruit_LiquidCrystal display;
-        AccelData prev_data;
+        Adafruit_RGBLCDShield _display;
+        AccelData _prev_data;
 };
 
 class DisplaySim {
