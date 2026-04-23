@@ -9,6 +9,7 @@ bool Adxl345::begin() {
 
     accel.setRange(ADXL345_RANGE_8_G);
     accel.setDataRate(ADXL345_DATARATE_50_HZ);
+    accel.writeRegister(ADXL345_REG_OFSZ, 8); // offset z-axis
 
     return true;
 }
